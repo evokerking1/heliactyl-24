@@ -1,0 +1,121 @@
+<head>
+  <title><%= settings.name %></title>
+  <link rel="icon" type="image/x-icon" href="../assets/favicon.png">
+  <link rel="stylesheet" href="../assets/tailwind.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://unpkg.com/@popperjs/core@2.10.1/dist/umd/popper.min.js"></script>
+
+  <!-- Inter font -->
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body class="min-h-full bg-stone-950" style="font-family: 'Inter', sans-serif;">
+  <%- include('../components/navigation') %>
+  <div class="md:pl-64">
+    <main class="min-h-screen">
+      <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div class="px-4 py-8 sm:px-0">
+          <!-- Servers Header -->
+          <div class="sm:flex sm:items-center sm:justify-between">
+            <div>
+              <h2 class="text-2xl font-bold leading-7 text-stone-200 sm:truncate sm:text-3xl sm:tracking-tight">Servers</h2>
+              <p class="mt-1 text-sm leading-6 text-stone-400">Manage your game servers and applications.</p>
+            </div>
+            <div class="mt-4 sm:ml-4 sm:mt-0">
+              <a href="/create" class="inline-flex items-center rounded-md bg-stone-800 px-3 py-2 text-sm font-semibold text-stone-200 shadow-sm hover:bg-stone-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-stone-600">
+                Create Server
+              </a>
+            </div>
+          </div>
+
+          <!-- Server Grid -->
+          <div class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <% for (let i = 0, len = pterodactyl.relationships.servers.data.length; i < len; i++) { %>
+              <div class="relative flex flex-col rounded-lg bg-stone-900 p-6 shadow-sm ring-1 ring-stone-800 hover:shadow-lg transition-shadow duration-200">
+                <div class="flex items-center justify-between">
+                  <h3 class="text-lg font-semibold leading-6 text-stone-200"><%= pterodactyl.relationships.servers.data[i].attributes.name.length > 40 ? pterodactyl.relationships.servers.data[i].attributes.name.slice(0, 40) + "..." : pterodactyl.relationships.servers.data[i].attributes.name %></h3>
+                  <span class="inline-flex items-center rounded-md px-2 py-1 text-xs font-medium <%= pterodactyl.relationships.servers.data[i].attributes.status === 'running' ? 'bg-green-500/10 text-green-400' : 'bg-red-500/10 text-red-400' %>">
+                    <%= pterodactyl.relationships.servers.data[i].attributes.status %>
+                  </span>
+                </div>
+                <div class="mt-4 flex-1">
+                  <dl class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                    <div>
+                      <dt class="text-sm font-medium text-stone-400">CPU</dt>
+                      <dd class="mt-1 text-sm text-stone-200"><%= pterodactyl.relationships.servers.data[i].attributes.limits.cpu/100 %>%</dd>
+                    </div>
+                    <div>
+                      <dt class="text-sm font-medium text-stone-400">Memory</dt>
+                      <dd class="mt-1 text-sm text-stone-200"><%= pterodactyl.relationships.servers.data[i].attributes.limits.memory/1024 %> MB</dd>
+                    </div>
+                    <div>
+                      <dt class="text-sm font-medium text-stone-400">Storage</dt>
+                      <dd class="mt-1 text-sm text-stone-200"><%= pterodactyl.relationships.servers.data[i].attributes.limits.disk/1024 %> MB</dd>
+                    </div>
+                    <div>
+                      <dt class="text-sm font-medium text-stone-400">Location</dt>
+                      <dd class="mt-1 text-sm text-stone-200"><%= pterodactyl.relationships.servers.data[i].attributes.location %></dd>
+                    </div>
+                  </dl>
+                </div>
+                <div class="mt-6 flex space-x-3">
+                  <a href="/edit?id=<%= pterodactyl.relationships.servers.data[i].attributes.id %>" class="flex-1 rounded-md bg-stone-800 px-3 py-2 text-center text-sm font-semibold text-stone-200 shadow-sm hover:bg-stone-700">
+                    Manage
+                  </a>
+                  <button onclick="deleteServer('<%= pterodactyl.relationships.servers.data[i].attributes.id %>')" class="rounded-md bg-red-500/10 px-3 py-2 text-sm font-semibold text-red-400 shadow-sm hover:bg-red-500/20">
+                    Delete
+                  </button>
+                </div>
+              </div>
+            <% } %>
+          </div>
+
+          <!-- No Servers Message -->
+          <% if (pterodactyl.relationships.servers.data.length === 0) { %>
+            <div class="mt-8 rounded-lg bg-stone-900/50 p-8 text-center">
+              <svg class="mx-auto h-12 w-12 text-stone-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/>
+              </svg>
+              <h3 class="mt-2 text-sm font-semibold text-stone-200">No servers</h3>
+              <p class="mt-1 text-sm text-stone-400">Get started by creating a new server.</p>
+              <div class="mt-6">
+                <a href="/create" class="inline-flex items-center rounded-md bg-stone-800 px-3 py-2 text-sm font-semibold text-stone-200 shadow-sm hover:bg-stone-700">
+                  Create Server
+                </a>
+              </div>
+            </div>
+          <% } %>
+
+          <!-- Error Messages -->
+          <% if (req.query.err) { %>
+            <div class="mt-8 rounded-lg bg-red-500/10 p-4">
+              <div class="flex">
+                <div class="flex-shrink-0">
+                  <svg class="h-5 w-5 text-red-400" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.28 7.22a.75.75 0 00-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 101.06 1.06L10 11.06l1.72 1.72a.75.75 0 101.06-1.06L11.06 10l1.72-1.72a.75.75 0 00-1.06-1.06L10 8.94 8.28 7.22z" clip-rule="evenodd" />
+                  </svg>
+                </div>
+                <div class="ml-3">
+                  <h3 class="text-sm font-medium text-red-400">Error</h3>
+                  <div class="mt-2 text-sm text-red-300">
+                    <p>Error code: <%= req.query.err %></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% } %>
+        </div>
+      </div>
+    </main>
+    <%- include('../components/footer') %>
+  </div>
+</div>
+
+<script>
+  function deleteServer(id) {
+    if (confirm('Are you sure you want to delete this server? This action cannot be undone.')) {
+      window.location.href = `/delete/${id}`;
+    }
+  }
+</script>
