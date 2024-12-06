@@ -12,7 +12,6 @@ const chalk = require("chalk");
 const cluster = require("cluster");
 const ejs = require("ejs");
 const settings = require("./settings.json");
-const arciotext = require("./misc/afk.js");
 
 const defaultthemesettings = {
   index: "index.ejs",
@@ -28,7 +27,7 @@ module.exports.renderdataeval = `(async () => {
   const JavaScriptObfuscator = require('javascript-obfuscator');
   const newsettings = JSON.parse(require("fs").readFileSync("./settings.json"));
   const userPackage = req.session.userinfo ? (await db.get("package-" + req.session.userinfo.id) || newsettings.api.client.packages.default) : null;
-  
+  const arciotext = require(require("path").resolve("./misc/afk.js"));
   return {
     req,
     settings: newsettings,
