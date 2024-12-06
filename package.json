@@ -17,13 +17,13 @@
     "javascript-obfuscator": "^4.0.2",
     "keyv": "^4.0.4",
     "node-cache": "^5.1.2",
-    "nodemon": "^2.0.21",
+    "nodemon": "^3.1.7",
     "uuid": "^9.0.1",
     "valid-url": "^1.0.9",
     "warn": "^1.0.1"
   },
   "scripts": {
-    "start": "nodemon app.js",
+    "start": "node app.js",
     "build": "npx tailwindcss -i ./assets/tw.conf -o ./assets/tailwind.css --prod"
   }
 }
