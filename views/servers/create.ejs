@@ -23,8 +23,8 @@
      }
      %>
   <%- include('../components/navigation') %>
-  <div class="py-10">
-    <main>
+  <div class="md:pl-64">
+    <main class="min-h-screen">
       <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div class="px-4 py-8 sm:px-0">
           <% if ((packages ? packages.ram : 0)/1024 + extraresources.ram/1024 - ram/1024 > 0) { %>
@@ -163,7 +163,7 @@
         </div>
       </div>
     </main>
+    <%- include('../components/footer') %>
   </div>
-  <%- include('../components/footer') %>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/AlertifyJS/1.13.1/alertify.js" integrity="sha512-eOUPKZXJTfgptSYQqVilRmxUNYm0XVHwcRHD4mdtCLWf/fC9XWe98IT8H1xzBkLL4Mo9GL0xWMSJtgS5te9rQA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
