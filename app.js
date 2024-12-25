@@ -91,7 +91,8 @@ if (cluster.isMaster) {
   module.exports.app = app;
 
   app.use((req, res, next) => {
-    res.setHeader("X-Powered-By", "Heliactyl 24.0.0");
+    res.setHeader("X-Powered-By", "24th Gen 14th Gen Heliactyl (Cascade Ridge)");
+    res.setHeader("X-Heliactyl", "srydenoss:cascade/55-2");
     next();
   });
 
