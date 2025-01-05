@@ -60,7 +60,7 @@ npm run build - builds TailwindCSS, required for making changes to the UI
 
 ## Heliactyl API v2
 
-In v14, we've introduced the next generation of Heliactyl's API. You can see the documentation below:
+From Heliactyl v14, we've introduced the next generation of Heliactyl's API. You can see the documentation below:
 
 ### /api/v2/userinfo
 
