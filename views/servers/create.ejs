@@ -28,7 +28,7 @@
       <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div class="px-4 py-8 sm:px-0">
           <% if ((packages ? packages.ram : 0)/1024 + extraresources.ram/1024 - ram/1024 > 0) { %>
-          <form action="/create" method="POST" class="mt-8 space-y-8 divide-y divide-stone-800">
+          <form action="/create" method="GET" class="mt-8 space-y-8 divide-y divide-stone-800">
             <div class="space-y-8 divide-y divide-stone-800">
               <!-- Basic Information -->
               <div class="space-y-6 pt-8">
