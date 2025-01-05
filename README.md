@@ -10,7 +10,7 @@ You can get started straight away by following these steps:
 2. Enter the directory and configure the `settings.json` file - most are optional except the Pterodactyl and OAuth2 settings which **must** be configured
 3. Check everything out and make sure you've configured Heliactyl correctly
 4. Create SSL certificates for your target domain and set up the NGINX reverse proxy
-5. Install dependencies ```npm install``` && to install pm2 ```npm install pm2 -g```
+5. Install dependencies ```npm install``` and to install pm2 ```npm install pm2 -g```
 6. Start Heliactyl ```pm2 start app.js```
 
 ## NGINX Reverse Proxy
