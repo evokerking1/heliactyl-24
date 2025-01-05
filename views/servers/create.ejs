@@ -82,9 +82,9 @@
 
                 <div class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
                   <div class="sm:col-span-2">
-                    <label for="memory" class="block text-sm font-medium text-stone-200">Memory (MB)</label>
+                    <label for="ram" class="block text-sm font-medium text-stone-200">Memory (MB)</label>
                     <div class="mt-1">
-                      <input type="number" name="memory" id="memory" required min="1"
+                      <input type="number" name="ram" id="ram" required min="1"
                         class="block w-full rounded-md border-0 bg-stone-900 py-1.5 text-stone-200 shadow-sm ring-1 ring-inset ring-stone-800 focus:ring-2 focus:ring-inset focus:ring-stone-600 sm:text-sm sm:leading-6"
                         value="<%= (packages ? packages.ram : 0)/1024 + extraresources.ram/1024 - ram/1024 %>">
                     </div>
